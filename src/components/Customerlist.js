@@ -28,7 +28,23 @@ const Customerlist = () => {
     {
       Header: 'Address',
       accessor: 'streetaddress'
-    }
+    },
+    {
+      Header: 'Postcode',
+      accessor: 'postcode'
+    },
+    {
+      Header: 'City',
+      accessor: 'city'
+    },
+    {
+      Header: 'Email',
+      accessor: 'email'
+    },
+    {
+      Header: 'Phone',
+      accessor: 'phone'
+    },
     ]
 
   return (
