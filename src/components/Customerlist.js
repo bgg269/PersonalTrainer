@@ -9,7 +9,6 @@ const Customerlist = () => {
     fetchCustomers();
   }, [])
 
-
   const fetchCustomers = () => {
     fetch('https://customerrest.herokuapp.com/api/customers')
     .then(response => response.json())
@@ -34,7 +33,6 @@ const Customerlist = () => {
 
   return (
     <div>
-        
       <ReactTable filterable={true} columns={columns} data={customers}/>
     </div>
   );

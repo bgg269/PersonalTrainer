@@ -9,7 +9,6 @@ const Trainingslist = () => {
     fetchTrainings();
   }, [])
 
-
   const fetchTrainings = () => {
     fetch('https://customerrest.herokuapp.com/api/trainings')
     .then(response => response.json())
@@ -33,8 +32,7 @@ const Trainingslist = () => {
     ]
 
   return (
-    <div>
-        
+    <div> 
       <ReactTable filterable={true} columns={columns} data={trainings}/>
     </div>
   );
