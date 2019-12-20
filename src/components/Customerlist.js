@@ -3,6 +3,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import Button from '@material-ui/core/Button';
 
+import EditCustomer from './EditCustomer';
 import Snackbar from '@material-ui/core/Snackbar';
 import Addcustomer from './Addcustomer';
 import Grid from '@material-ui/core/Grid';
@@ -45,12 +46,25 @@ const Customerlist = () => {
     if (window.confirm('Are you sure?')) {
       fetch(link, {method: 'DELETE'})
       .then(res => fetchCustomers())
-      .then(res => setMessage('Car deleted'))
+      .then(res => setMessage('Customer deleted'))
       .then(res => setOpen(true))
       .catch(err => console.error(err))
     }
   }
 
+  const updateCustomer = (customer, link) => {
+    fetch(link, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(customer)
+    })
+    .then(res => fetchCustomers())
+    .then(res => setMessage('Changes saved succesfully'))
+    .then(res => setOpen(true))
+    .catch(err => console.error(err))
+}
 
   const columns = [
     {
@@ -80,6 +94,12 @@ const Customerlist = () => {
     {
       Header: 'Phone',
       accessor: 'phone'
+    },
+    {
+        filterable: false,
+        sortable: false,
+        width: 100,
+        Cell: row => <EditCustomer updateCustomer={updateCustomer} customer={row.original} />
     },
     {
       accessor: 'links[0].href',

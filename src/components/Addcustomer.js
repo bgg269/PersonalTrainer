@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 export default function Addcustomer(props) {
     const [open, setOpen] = useState(false);
     const [customer, setCustomer] = useState(
-      {firstname: '', lastname: ''}
+      {firstname: '', lastname: '', streetaddress: '', postcode: '', city: '', email: '', phone: ''}
     );
   
     const handleClickOpen = () => {
@@ -39,7 +39,7 @@ export default function Addcustomer(props) {
         <DialogTitle id="form-dialog-title">New customer</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Fill the information for new customer
+            Fill the information for a new customer
           </DialogContentText>
           <TextField
             autoFocus
@@ -58,6 +58,47 @@ export default function Addcustomer(props) {
             label="Lastname"
             fullWidth
           />
+          <TextField
+            autoFocus
+            margin="dense"
+            name="streetaddress"
+            value={customer.streetaddress}
+            onChange={e => handleChange(e)}
+            label="Address"
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            name="postcode"
+            value={customer.postcode}
+            onChange={e => handleChange(e)}
+            label="Postcode"
+            fullWidth
+          /><TextField
+          autoFocus
+          margin="dense"
+          name="city"
+          value={customer.city}
+          onChange={e => handleChange(e)}
+          label="City"
+          fullWidth
+        />
+        <TextField
+          margin="dense"
+          name="email"
+          value={customer.email}
+          onChange={e => handleChange(e)}
+          label="Email"
+          fullWidth
+        />
+        <TextField
+          margin="dense"
+          name="phone"
+          value={customer.phone}
+          onChange={e => handleChange(e)}
+          label="Phone"
+          fullWidth
+        />
           
         </DialogContent>
       <DialogActions>
