@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+import Button from '@material-ui/core/Button';
 
+import Snackbar from '@material-ui/core/Snackbar';
 import Addcustomer from './Addcustomer';
 import Grid from '@material-ui/core/Grid';
 
 const Customerlist = () => {
   const [customers, setCustomers] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     fetchCustomers();
   }, [])
+
+  const handleClose = (event, reason) => {
+    setOpen(false);
+  };  
 
   const fetchCustomers = () => {
     fetch('https://customerrest.herokuapp.com/api/customers')
@@ -31,6 +39,16 @@ const Customerlist = () => {
     )
     .then(res => fetchCustomers())
     .catch(err => console.error(err))
+  }
+
+  const deleteCustomer = (link) => {
+    if (window.confirm('Are you sure?')) {
+      fetch(link, {method: 'DELETE'})
+      .then(res => fetchCustomers())
+      .then(res => setMessage('Car deleted'))
+      .then(res => setOpen(true))
+      .catch(err => console.error(err))
+    }
   }
 
 
@@ -63,6 +81,12 @@ const Customerlist = () => {
       Header: 'Phone',
       accessor: 'phone'
     },
+    {
+      accessor: 'links[0].href',
+      filterable: false,
+      sortable: false,
+      Cell: ({value}) => <Button size="small" color="secondary" onClick={() => deleteCustomer(value)}>Delete</Button>
+    },
     ]
 
   return (
@@ -75,6 +99,7 @@ const Customerlist = () => {
       </Grid>
       </Grid>
       <ReactTable filterable={true} columns={columns} data={customers}/>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} message={message} />
     </div>
   );
 }
