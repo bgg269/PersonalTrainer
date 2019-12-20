@@ -11,9 +11,9 @@ const Trainingslist = () => {
   }, [])
 
   const fetchTrainings = () => {
-    fetch('https://customerrest.herokuapp.com/api/trainings')
+    fetch('https://customerrest.herokuapp.com/gettrainings')
     .then(response => response.json())
-    .then(data => setTrainings(data.content))
+    .then(data => setTrainings(data))
     .catch(err => console.error(err))
   }
 
@@ -30,6 +30,14 @@ const Trainingslist = () => {
     {
       Header: 'Duration (min)',
       accessor: 'duration'
+    },
+    {
+        Header: "Customer's firstname",
+        accessor: 'customer.firstname'
+    },
+    {
+        Header: "Customer's lastname",
+        accessor: 'customer.lastname'
     }
     ]
 

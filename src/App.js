@@ -55,6 +55,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Customerlist} />
         <Route exact path="/trainings" component={Trainingslist} />
+        <Route render= {() => <h1>Page not found</h1>}/>
       </Switch>
       </div>
       </BrowserRouter>
