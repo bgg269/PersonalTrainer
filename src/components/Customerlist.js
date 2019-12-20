@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
+import Addcustomer from './Addcustomer';
+import Grid from '@material-ui/core/Grid';
+
 const Customerlist = () => {
   const [customers, setCustomers] = useState([]);
 
@@ -15,6 +18,21 @@ const Customerlist = () => {
     .then(data => setCustomers(data.content))
     .catch(err => console.error(err))
   }
+
+  const saveCustomer = (newCustomer) => {
+    fetch('https://customerrest.herokuapp.com/api/customers',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newCustomer)
+      }
+    )
+    .then(res => fetchCustomers())
+    .catch(err => console.error(err))
+  }
+
 
   const columns = [
     {
@@ -49,6 +67,13 @@ const Customerlist = () => {
 
   return (
     <div>
+      <Grid container>    
+        <Grid item>       
+          <Addcustomer saveCustomer={saveCustomer} />      
+      </Grid>
+      <Grid style={{padding: 15}} item>
+      </Grid>
+      </Grid>
       <ReactTable filterable={true} columns={columns} data={customers}/>
     </div>
   );
