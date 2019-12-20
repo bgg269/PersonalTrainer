@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+import Moment from 'moment';
 
 const Trainingslist = () => {
   const [trainings, setTrainings] = useState([]);
@@ -23,7 +24,8 @@ const Trainingslist = () => {
     },
     {
       Header: 'Date',
-      accessor: 'date'
+      accessor: 'date',
+      Cell: row => Moment(row.value).format('DD.MM.YYYY HH:MM')
     },
     {
       Header: 'Duration (min)',
