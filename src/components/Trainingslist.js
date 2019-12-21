@@ -4,6 +4,8 @@ import 'react-table/react-table.css';
 import Moment from 'moment';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import Grid from '@material-ui/core/Grid';
+import Addtraining from './Addtraining';
 
 
 export default function TrainingsList(props) {
@@ -39,6 +41,21 @@ export default function TrainingsList(props) {
     }
   }
 
+  
+  const saveTraining = (newTraining) => {
+    fetch('https://customerrest.herokuapp.com/api/trainings',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newTraining)
+      }
+    )
+    .then(res => fetchTrainings())
+    .catch(err => console.error(err))
+  }
+
   const columns = [
     {
       Header: 'Activity',
@@ -72,6 +89,13 @@ export default function TrainingsList(props) {
 
   return (
         <div>
+          <Grid container>    
+          <Grid item>       
+          <Addtraining saveTraining={saveTraining} />      
+          </Grid>
+          <Grid style={{padding: 15}} item>
+          </Grid>
+          </Grid>
           <ReactTable filterable={true} columns={columns} data={trainings} />
           <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} message={message}/>
         </div>
