@@ -42,7 +42,7 @@ const Customerlist = () => {
     .catch(err => console.error(err))
   }
 
-  const saveTraining = (newTraining) => {
+  const saveTraining = (newTraining, link) => {
     fetch('https://customerrest.herokuapp.com/api/trainings',
       {
         method: 'POST',
@@ -109,13 +109,6 @@ const Customerlist = () => {
       Header: 'Phone',
       accessor: 'phone'
     },
-      {
-        filterable: false,
-            sortable: false,
-            width: 100,
-            accessor: "links[0].href",
-            Cell: row => <Addtraining training={row.original} saveTraining={saveTraining} />
-    },
     {
         filterable: false,
         sortable: false,
@@ -135,6 +128,9 @@ const Customerlist = () => {
       <Grid container>    
         <Grid item>       
           <Addcustomer saveCustomer={saveCustomer} />      
+      </Grid>
+      <Grid item>       
+          <Addtraining saveTraining={saveTraining} />      
       </Grid>
       <Grid style={{padding: 15}} item>
       </Grid>

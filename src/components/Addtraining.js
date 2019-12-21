@@ -13,7 +13,7 @@ export default function Addtraining(props) {
     const [open, setOpen] = useState(false);
     const [customer, setCustomer] = useState([]);
     const [training, setTraining] = useState({
-        date: new Date(), duration: '', activity: ''});
+        date: new Date(), duration: '', activity: '', customer: props.link });
   
         const fetchCustomers = () => {
           fetch('https://customerrest.herokuapp.com/api/customers')
