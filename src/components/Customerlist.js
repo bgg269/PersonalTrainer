@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import Button from '@material-ui/core/Button';
-
+import Addtraining from './Addtraining';
 import EditCustomer from './EditCustomer';
 import Snackbar from '@material-ui/core/Snackbar';
 import Addcustomer from './Addcustomer';
@@ -17,7 +17,7 @@ const Customerlist = () => {
     fetchCustomers();
   }, [])
 
-  const handleClose = (event, reason) => {
+  const handleClose = (event) => {
     setOpen(false);
   };  
 
@@ -36,6 +36,20 @@ const Customerlist = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(newCustomer)
+      }
+    )
+    .then(res => fetchCustomers())
+    .catch(err => console.error(err))
+  }
+
+  const saveTraining = (newTraining) => {
+    fetch('https://customerrest.herokuapp.com/api/trainings',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newTraining)
       }
     )
     .then(res => fetchCustomers())
@@ -94,6 +108,13 @@ const Customerlist = () => {
     {
       Header: 'Phone',
       accessor: 'phone'
+    },
+      {
+        filterable: false,
+            sortable: false,
+            width: 100,
+            accessor: "links[0].href",
+            Cell: row => <Addtraining training={row.original} saveTraining={saveTraining} />
     },
     {
         filterable: false,

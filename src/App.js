@@ -38,10 +38,10 @@ function App() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Link to="/">
+        <Link to="/" style={{color: "black"}}>
         <MenuItem onClick={handleClose}>Costumers</MenuItem>
         </Link>
-        <Link to="/trainings">
+        <Link to="/trainings" style={{color: "black"}}>
         <MenuItem onClick={handleClose}>Trainings</MenuItem>
         </Link>
       </Menu>
