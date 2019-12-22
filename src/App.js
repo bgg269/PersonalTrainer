@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Calendar from './components/Calendar';
 
 function App() {
   const [anchorEl, setAnchorEl] = React.useState();
@@ -44,6 +45,9 @@ function App() {
         <Link to="/trainings" style={{color: "black"}}>
         <MenuItem onClick={handleClose}>Trainings</MenuItem>
         </Link>
+        <Link to="/calendar" style={{color: "black"}}>
+        <MenuItem onClick={handleClose}>Calendar</MenuItem>
+        </Link>
       </Menu>
       Personal Trainer
         </Typography>
@@ -55,6 +59,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Customerlist} />
         <Route exact path="/trainings" component={Trainingslist} />
+        <Route exact path="/calendar" component={Calendar} />
         <Route render= {() => <h1>Page not found</h1>}/>
       </Switch>
       </div>
